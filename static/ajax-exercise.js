@@ -43,6 +43,12 @@ $("#weather-form").on('submit', showWeather);
 function melonInfo(response) {
     console.log(response)
     $('#order-status').html(response.code, response.msg);
+    if (response.code === "ERROR"){
+        $('#order-status').addClass('order-error');
+    } else {
+
+        $('#order-status').addClass('order-ok');
+    }
 }
 
 function orderMelons(evt) {
