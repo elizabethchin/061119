@@ -40,12 +40,24 @@ $("#weather-form").on('submit', showWeather);
 
 
 // PART 3: ORDER MELONS
+function melonInfo(response) {
+    console.log(response)
+    $('#order-status').html(response.code, response.msg);
+}
 
 function orderMelons(evt) {
     evt.preventDefault();
 
     // TODO: show the result message after your form
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
+    // jQuery post method to make a request to that route using data from the form,
+    //melonInfo takes the returned result object and extracts the code and message
+    const formInputs = {
+        'qty' : $('#qty-field').val(),
+        'melonType' : $('melon-type-field').val()
+    };
+
+    $.post('/order-melons.json', formInputs, melonInfo);
 }
 
 $("#order-form").on('submit', orderMelons);
