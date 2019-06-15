@@ -2,33 +2,37 @@
 
 
 // PART 1: SHOW A FORTUNE
-function fortune(response) {
-    $('#fortune-text').html(response);
-}
+// function fortune(response) {
+//     //console.log(response);
+//     $('#fortune-text').html(response);
+// }
 
+
+// function showFortune() {
+//     $.get('/fortune', fortune);
+// }
+// or
 
 function showFortune() {
-    $.get('/fortune', fortune);
+    $.get('/fortune', (response) => $('#fortune-text').html(response));
 }
-
 $('#get-fortune-button').on('click', showFortune);
-
-
-
-
-
 
 // PART 2: SHOW WEATHER
 
+function forecast(response) {
+    console.log(response);
+    $('#weather-info').html(response.forecast);
+}
+
 function showWeather(evt) {
     evt.preventDefault();
-
     let url = "/weather.json";
     let formData = {"zipcode": $("#zipcode-field").val()};
-
-
-    // TODO: request weather with that URL and show the forecast in #weather-info
+    $.get(url, forecast);
 }
+    // TODO: request weather with that URL and show the forecast in #weather-info
+
 
 $("#weather-form").on('submit', showWeather);
 
